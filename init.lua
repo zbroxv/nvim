@@ -55,7 +55,3 @@ vim.cmd("nnoremap <expr> j (v:count == 0 ? 'gj' : 'j')")
 vim.keymap.set("n", "<leader>z", ":set spell spelllang=en_us<CR>")
 vim.keymap.set("n", "<leader>zr", ":set nospell<CR>")
 vim.keymap.set("i", "<C-c>", "<Esc>", { noremap = True, silent = True })
-
-vim.opt.foldlevel = 20
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use treesitter folds

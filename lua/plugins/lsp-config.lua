@@ -7,14 +7,14 @@ return {
       })
     end,
   },
-  -- {
-  --   "williamboman/mason-lspconfig.nvim",
-  --   config = function()
-  --     require("mason-lspconfig").setup({
-  --       ensure_installed = { "lua_ls", "basedpyright", "bashls" },
-  --     })
-  --   end,
-  -- },
+  {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = { "lua_ls", "basedpyright", },
+      })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -25,11 +25,7 @@ return {
         return cwd .. "/venv"
       end
 
-      local lspconfig = require("lspconfig")
-      lspconfig.lua_ls.setup({
-        capabilites = capabilities,
-      })
-      lspconfig.basedpyright.setup({
+      vim.lsp.config("basedpyright", {
         settings = {
           basedpyright= {
             analysis = {
@@ -46,13 +42,13 @@ return {
         },
         capabilites = capabilities,
       })
-      lspconfig.clangd.setup({
+      vim.lsp.config("clangd", {
         capabilites = capabilities,
       })
-      lspconfig.bashls.setup({
+      vim.lsp.config("bashls", {
         capabilites = capabilities,
       })
-      lspconfig.glslls.setup({
+      vim.lsp.config("glslls", {
         capabilities = capabilities,
       })
       vim.filetype.add({ extension = { vert = "glsl", frag = "glsl" } })

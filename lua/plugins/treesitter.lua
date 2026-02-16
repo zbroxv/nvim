@@ -2,7 +2,7 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function()
-    local configs = require("nvim-treesitter.configs")
+    local configs = require("nvim-treesitter.config")
 
     configs.setup({
       ensure_installed = {
@@ -17,6 +17,7 @@ return {
         "html",
         "bash",
         "markdown",
+        "markdown_inline",
         "glsl",
         "make",
       },
@@ -24,5 +25,10 @@ return {
       highlight = { enable = true },
       indent = { enable = true },
     })
+
+  vim.opt.foldlevel = 20
+  vim.opt.foldmethod = "expr"
+  vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use treesitter folds
   end,
 }
+
