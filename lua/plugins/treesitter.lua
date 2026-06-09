@@ -1,8 +1,10 @@
+--
 return {
   "nvim-treesitter/nvim-treesitter",
+  tag="v0.10.0",
   build = ":TSUpdate",
   config = function()
-    local configs = require("nvim-treesitter.config")
+    local configs = require("nvim-treesitter.configs")
 
     configs.setup({
       ensure_installed = {
@@ -20,15 +22,20 @@ return {
         "markdown_inline",
         "glsl",
         "make",
+        "rust",
+        "json",
+        "yaml",
+        "toml",
       },
       sync_install = false,
       highlight = { enable = true },
       indent = { enable = true },
     })
 
-  vim.opt.foldlevel = 20
   vim.opt.foldmethod = "expr"
-  vim.opt.foldexpr = "nvim_treesitter#foldexpr()" -- Use treesitter folds
+  vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+  vim.opt.foldlevel = 99
+  vim.opt.foldlevelstart = 99
   end,
 }
 

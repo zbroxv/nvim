@@ -1,10 +1,21 @@
+-- Configure linters and formatters
 local function get_max_line_length()
-	local cur_dir = vim.fn.getcwd():gsub("\\", "/")
-	local flake_files = { cur_dir .. "/.flake8", cur_dir .. "/tox.ini" }
+	local cur_dir = vim.fs.root(0, {
+		".black",
+		"ruff.toml",
+		".flake8",
+		"tox.ini",
+	})
+
+	if not cur_dir then
+		return nil
+	end
+
+	local config_files = { cur_dir .. "/.black", cur_dir .. "/ruff.toml", cur_dir .. "/.flake8", cur_dir .. "/tox.ini" }
 
 	local data = nil
 
-	for _, file_path in ipairs(flake_files) do
+	for _, file_path in ipairs(config_files) do
 		local flake_file = io.open(file_path, "r")
 		if flake_file then
 			data = flake_file:read("*a")
@@ -17,23 +28,23 @@ local function get_max_line_length()
 		return nil
 	end
 
-	local max_line = string.match(data, "max%-line%-length = %d+")
-
-	if not max_line then
-		return nil
+	local max = string.match(data, "line%-length%s*=%s*(%d+)")
+	if not max then
+		max = string.match(data, "max%-line%-length%s*=%s*(%d+)")
 	end
 
-	local max = string.match(max_line, "%d+")
 	return tonumber(max)
 end
 
+-- Sets up linters and formatters to appear as LSPs to Neovim
 return {
 	"nvimtools/none-ls.nvim",
 	dependencies = { "nvimtools/none-ls-extras.nvim" },
 	config = function()
 		local max_line_length = get_max_line_length()
 		if max_line_length then
-			vim.cmd("set colorcolumn=" .. max_line_length + 1)
+			vim.opt.colorcolumn = tostring(max_line_length + 1)
+		-- vim.cmd("set colorcolumn=" .. max_line_length + 1)
 		else
 			max_line_length = 79
 		end
@@ -44,7 +55,9 @@ return {
 				null_ls.builtins.formatting.black.with({
 					extra_args = { "--line-length=" .. max_line_length },
 				}),
-				null_ls.builtins.formatting.isort,
+				null_ls.builtins.formatting.isort.with({
+					extra_args = { "--line-length=" .. max_line_length },
+				}),
 				require("none-ls.diagnostics.flake8").with({
 					diagnostic_config = {
 						virtual_text = false,
@@ -59,6 +72,6 @@ return {
 				}),
 			},
 		})
-		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+		vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format the current buffer" })
 	end,
 }

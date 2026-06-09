@@ -1,0 +1,88 @@
+-- Configure Copilot
+return {}
+-- {
+--   -- Nice rendering for the Copilot chat
+-- 	{
+-- 		"MeanderingProgrammer/render-markdown.nvim",
+-- 		ft = { "copilot-chat" },
+-- 		config = function()
+-- 			require("render-markdown").setup({
+-- 				heading = {
+-- 					position = "inline",
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+--   -- Copilot auto complete
+-- 	{
+-- 		"zbirenbaum/copilot.lua",
+-- 		cmd = "Copilot",
+-- 		event = "InsertEnter",
+-- 		keys = {
+-- 			{
+-- 				"<leader>ct",
+-- 				function()
+-- 					vim.cmd("Copilot toggle")
+-- 					vim.notify("Toggled Copilot auto-complete", vim.log.levels.INFO)
+-- 				end,
+-- 				mode = "n",
+-- 				desc = "Toggle Copilot auto-complete",
+-- 			},
+-- 		},
+-- 		config = function()
+-- 			require("copilot").setup({
+-- 				suggestion = {
+-- 					enabled = true,
+-- 					auto_trigger = true,
+-- 					keymap = {
+-- 						accept = "<C-l>",
+-- 					},
+-- 				},
+-- 				panel = { enabled = true },
+-- 			})
+-- 		end,
+-- 	},
+--   -- Copilot chat
+-- 	{
+-- 		"CopilotC-Nvim/CopilotChat.nvim",
+-- 		dependencies = {
+-- 			{ "nvim-lua/plenary.nvim", branch = "master" },
+-- 		},
+-- 		build = "make tiktoken",
+-- 		keys = {
+-- 			{ "<leader>cc", "<cmd>CopilotChat<cr>", mode = "n", desc = "Open Copilot Chat" },
+-- 			{
+-- 				"<leader>ce",
+-- 				"<cmd>CopilotChatExplain<cr>",
+-- 				mode = "v",
+-- 				desc = "Explain code with Copilot Chat",
+-- 			},
+-- 			{
+-- 				"<leader>cr",
+-- 				"<cmd>CopilotChatReview<cr>",
+-- 				mode = "v",
+-- 				desc = "Code review with Copilot Chat",
+-- 			},
+-- 			{ "<leader>cf", "<cmd>CopilotChatFix<cr>", mode = "v", desc = "Fix code with Copilot Chat" },
+-- 			{
+-- 				"<leader>co",
+-- 				"<cmd>CopilotChatOptimize<cr>",
+-- 				mode = "v",
+-- 				desc = "Optimize code with Copilot Chat",
+-- 			},
+-- 		},
+-- 		config = function()
+-- 			require("CopilotChat").setup({
+-- 				mappings = {
+-- 					close = {
+-- 						normal = "<leader>cQ",
+-- 						insert = "<Esc>",
+-- 					},
+-- 					reset = {
+-- 						normal = "<leader>r",
+-- 					},
+-- 				},
+-- 			})
+-- 		end,
+-- 	},
+-- }
