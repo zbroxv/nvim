@@ -39,3 +39,9 @@ vim.opt.cursorline = true
 
 -- Keep lines visible above and below the cursor
 vim.opt.scrolloff = 10
+
+-- Fold functionality
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
