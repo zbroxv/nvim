@@ -17,14 +17,22 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 				},
+        defaults = {
+          mappings = {
+            i = {
+              ["<C-f>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+            },
+          },
+        },
 			})
 
 			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Fuzzy find files" })
 			vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Fuzzy find text" })
+      vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "Resume last search" })
 			vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Fuzzy find buffers" })
 			vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Display help tags" })
 			vim.keymap.set("n", "<leader>fs", builtin.grep_string, { desc = "Grep for current string" })
-			vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { desc = "Find recent files" })
+			vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = "Find recent files" })
 			vim.keymap.set("n", "<leader>fe", builtin.diagnostics, { desc = "Find diagnostics" })
 			vim.keymap.set(
 				"n",

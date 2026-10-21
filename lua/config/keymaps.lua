@@ -27,3 +27,9 @@ vim.keymap.set("n", "<leader>zr", "<cmd>set nospell<CR>", { desc = "Toggle off s
 
 -- Leave insert mode with <ctrl>c acts as <Esc>
 vim.keymap.set("i", "<C-c>", "<Esc>")
+
+-- Quick fix list navigation
+vim.keymap.set("n", "<leader>co", "<cmd>copen<CR>", { desc = "Open quickfix list" })
+vim.keymap.set("n", "<leader>cq", "<cmd>cclose<CR>", { desc = "Close quickfix list" })
+vim.keymap.set("n", "<leader>cn", "<cmd>cnext<CR>", { desc = "Next item in quickfix list" })
+vim.keymap.set("n", "<leader>cp", "<cmd>cprev<CR>", { desc = "Previous item in quickfix list" })
