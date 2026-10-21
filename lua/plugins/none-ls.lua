@@ -67,7 +67,6 @@ return {
 					},
 					extra_args = {
 						"--max-line-length=" .. max_line_length,
-						"ignore=...",
 					},
 				}),
 			},

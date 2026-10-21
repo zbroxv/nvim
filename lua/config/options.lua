@@ -39,3 +39,7 @@ vim.opt.cursorline = true
 
 -- Keep lines visible above and below the cursor
 vim.opt.scrolloff = 10
+
+-- Use clean shell (Fixes speed of subprocesses such as those used by 
+-- vim tmux navigator when in a session with large path variable etc.)
+vim.opt.shell = "/bin/bash"
